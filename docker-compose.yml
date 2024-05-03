@@ -1,0 +1,21 @@
+services:
+  debug:
+    container_name: hyunseoki_EDM2
+    build:
+      context: $PWD
+      args:
+        - USER
+        - XDG_RUNTIME_DIR
+    image: hyunseoki/edm2
+    tty: true
+    stdin_open: true
+    shm_size: 1TB
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+              count: all
+    volumes:
+      - $PWD:/workspace
